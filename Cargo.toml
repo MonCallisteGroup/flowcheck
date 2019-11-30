@@ -1,8 +1,9 @@
 [package]
 name = "flowcheck"
 version = "0.1.0"
-authors = ["Kent Ibbetson <kent.ibbetson@moncalliste.com"]
+authors = ["Kent Ibbetson <kent.ibbetson@moncalliste.com>"]
 edition = "2018"
+description = "A tool to check network connectivity"
 
 [dependencies]
 clap = "2.33.0"
