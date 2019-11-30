@@ -1,9 +1,9 @@
 [package]
-name = "net_test"
+name = "flowcheck"
 version = "0.1.0"
 authors = ["Kent Ibbetson <kent.ibbetson@moncalliste.com"]
 edition = "2018"
 
 [dependencies]
 clap = "2.33.0"
-hostname = "*"
+hostname = "0.1.5"
