@@ -15,10 +15,10 @@ use clap::{Arg,App};
 fn main() {
 
     /* set up the arguments */
-    let matches = App::new("net_test")
-        .version("1.0")
-        .author("Kent Ibbetson kent.ibbetson02@vodafone.com")
-        .about("checks network flows")
+    let matches = App::new(env!("CARGO_PKG_NAME"))
+        .version(env!("CARGO_PKG_VERSION"))
+        .author(env!("CARGO_PKG_AUTHORS"))
+        .about(env!("CARGO_PKG_DESCRIPTION"))
         .arg(Arg::with_name("path")
             .short("p")
             .long("path")
