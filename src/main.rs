@@ -34,14 +34,17 @@ fn main() {
             .takes_value(true)
             .required(false))
         .arg(Arg::with_name("hostname")
-                 .short("n")
-                 .long("hostname")
-                 .value_name("HOSTNAME")
-                 .help("use hostname (default is hostname returned by 'hostname' command)")
-                 .takes_value(true)
-                 .required(false)
-        )
-        .get_matches();
+            .short("n")
+            .long("hostname")
+            .value_name("HOSTNAME")
+            .help("use hostname (default is hostname returned by 'hostname' command)")
+            .takes_value(true)
+            .required(false)
+        ).get_matches();
+
+    /* we need a connection timeout, to detect missing flows, default is 10s, but 1s is probably enough */
+    let arg_timeout = matches.value_of("timeout").unwrap_or("10");
+    let timeout = arg_timeout.parse::<u64>().unwrap_or(10);
 
     /* get our machine name - this is what our system is configured to - returned by uname -n or 'hostname'*/
     let myhostname = hostname::get_hostname().unwrap();
@@ -53,15 +56,9 @@ fn main() {
        the flow files are in path/hostname
      */
     let path = matches.value_of("path").unwrap();
-    let mut filename: String = path.to_owned();
-    if !filename.ends_with("/") {
-        filename.push_str("/");
-    }
-    filename.push_str(filehost);
+    let filename: String = build_file_path(path.to_string(),filehost.to_string());
 
-    /* we need a connection timeout, to detect missing flows, default is 10s, but 1s is probably enough */
-    let arg_timeout = matches.value_of("timeout").unwrap_or("10");
-    let timeout = arg_timeout.parse::<u64>().unwrap_or(10);
+
 
     /* open the file */
 //    let file = File::open(filename).unwrap();
@@ -131,8 +128,25 @@ fn main() {
     }
 }
 
+fn build_file_path(path: String, filehost: String) -> String {
+    let mut fullpath: String = path;
+    if !fullpath.ends_with("/") {
+        fullpath.push_str("/");
+    }
+    fullpath.push_str(&filehost);
+    fullpath
+}
 /*
 connection err: Os { code: 61, kind: ConnectionRefused, message: "Connection refused" }
 
 connection err: Os { code: 13, kind: PermissionDenied, message: "Permission denied" }
 */
+
+#[cfg(test)]
+mod tests {
+    #[test]
+    fn build_file_path() {
+        let x = super::build_file_path(String::from("/var/tmp/"), String::from("test"));
+        assert_eq!(x, "/var/tmp/test");
+    }
+}
