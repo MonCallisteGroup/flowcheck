@@ -1,8 +1,7 @@
 # Flowcheck
 
-![Build status](https://github.com/MonCallisteGroup/flowcheck/workflows/Rust/badge.svg)
+![](https://github.com/MonCallisteGroup/flowcheck/workflows/Rust/badge.svg?branch=master)
 
-[![Travis build Status](https://travis-ci.com/servo/rust-url.svg?branch=master)](https://travis-ci.com/servo/rust-url)
 A simple rust tool to test connectivity to a specified list of host:port definitions.
 
 ## Getting Started
