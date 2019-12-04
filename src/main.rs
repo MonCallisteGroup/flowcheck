@@ -87,7 +87,12 @@ fn main() {
     let filename: String = build_file_path(path.to_string(), filehost.to_string());
 
     match process(filename, timeout) {
-        Ok(r) => print!("{}",r),
+        Ok(r) => {
+            println!("Lines processed: {}",r.lines);
+            println!("Flows OK: {}",r.flow_ok);
+            println!("Unresolved hosts: {}",r.unresolved);
+            println!("Other network errors: {}", r.other);
+        },
         Err(e) => print!("{}",e)
     }
 }
