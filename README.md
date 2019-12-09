@@ -91,3 +91,12 @@ OPTIONS:
 ## Licence
 
 ## Acknowledgements
+
+## Notes
+
+This is basically the first 'production' ready tool I've written in Rust,
+one that fills an actual requirement we had. Originally I had written a Perl
+script to do the same work, but it was quite slow - I'm sure no fault of
+perl, but rather my coding. The rust version is vastly superior; faster
+and more stable. Yes, there are other (existing) way to handle this task,
+but it was a interesting project to test the Rust development waters.
